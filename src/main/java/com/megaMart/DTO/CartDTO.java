@@ -12,6 +12,16 @@ public class CartDTO {
 	public CartDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public CartDTO(Integer cartId, String productName, String sellerName, Integer quantity, double cartOfferPrice) {
+		super();
+		this.cartId = cartId;
+		this.productName = productName;
+		this.sellerName = sellerName;
+		this.quantity = quantity;
+		this.cartOfferPrice = cartOfferPrice;
+	}
+
 	public Integer getCartId() {
 		return cartId;
 	}

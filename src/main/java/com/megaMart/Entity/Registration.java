@@ -15,6 +15,14 @@ public class Registration {
 	public Registration() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Registration(String emailId, String name, String password) {
+		super();
+		this.emailId = emailId;
+		this.name = name;
+		this.password = password;
+	}
+
 	public String getEmailId() {
 		return emailId;
 	}

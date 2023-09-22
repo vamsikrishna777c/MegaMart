@@ -9,6 +9,14 @@ public class RegistrationDTO {
 	public RegistrationDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public RegistrationDTO(String emailId, String name, String password) {
+		super();
+		this.emailId = emailId;
+		this.name = name;
+		this.password = password;
+	}
+
 	public String getEmailId() {
 		return emailId;
 	}
