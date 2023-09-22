@@ -1,5 +1,8 @@
 package com.megaMart.service;
 
-public interface MegaMartService {
+import com.megaMart.DTO.RegistrationDTO;
+import com.megaMart.exception.MegaMartException;
 
+public interface MegaMartService {
+	public void registration(RegistrationDTO registration) throws MegaMartException;
 }
