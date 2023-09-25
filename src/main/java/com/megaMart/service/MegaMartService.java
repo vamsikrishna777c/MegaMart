@@ -5,4 +5,7 @@ import com.megaMart.exception.MegaMartException;
 
 public interface MegaMartService {
 	public void registration(RegistrationDTO registration) throws MegaMartException;
+	public RegistrationDTO userLogin(String emailId, String password) throws MegaMartException;
+	
+
 }
