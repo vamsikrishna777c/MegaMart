@@ -8,16 +8,18 @@ import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="orders")
 public class Order {
 
 	@Id
 	/*
-	 * @GenericGenerator(name = "sequence_order_id", strategy =
-	 * "com.megaMart.Entity.OrderIdGenerator")
+	 * @GenericGenerator(name = "orderId", strategy =
+	 * "com.eframe.model.generator.ClientIdGenerator")
 	 * 
-	 * @GeneratedValue(generator = "sequence_order_id")
+	 * @GeneratedValue(generator = "orderId")
 	 */
 	String orderId;
 	String displayName;
