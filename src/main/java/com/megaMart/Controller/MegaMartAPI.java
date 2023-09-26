@@ -16,30 +16,38 @@ import com.megaMart.DTO.RegistrationDTO;
 import com.megaMart.exception.MegaMartException;
 import com.megaMart.service.MegaMartService;
 
+import com.megaMart.DTO.ProductDTO;
+
 @RestController
-@RequestMapping
+@RequestMapping(value="mega-mart")
 public class MegaMartAPI {
 	@Autowired
 	private MegaMartService service;
 	@Autowired
 	private Environment environment;
-		@PostMapping("/user")
-	    public ResponseEntity<String> registration(@RequestBody RegistrationDTO registration )throws MegaMartException{ 
-		  service.registration(registration); 
-		  String successMessage=environment.getProperty("API.REGISTRATION_SUCCESS") + registration.getName();
-		  return new ResponseEntity<>(successMessage, HttpStatus.OK);
-	    }
-		@PostMapping("/login")
-		public ResponseEntity<RegistrationDTO> userLogin(@RequestBody RegistrationDTO user) throws MegaMartException{
-			RegistrationDTO u =service.userLogin(user.getEmailId(), user.getPassword());
-			return new ResponseEntity<>(u, HttpStatus.OK);
-		}
-		@PostMapping("/cart")
-		public ResponseEntity<String> addToCart(@RequestBody CartDTO cart) throws MegaMartException{
-			service.addToCart(cart);
-			String successMessage=environment.getProperty("API.PRODUCT_ADDED_SUCCESS");
-			return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
-		}
-	 
-
+	@Autowired
+	private MegaMartService megaMartService;
+	@PostMapping("/user")
+    public ResponseEntity<String> registration(@RequestBody RegistrationDTO registration )throws MegaMartException{ 
+	  service.registration(registration); 
+	  String successMessage=environment.getProperty("API.REGISTRATION_SUCCESS") + registration.getName();
+	  return new ResponseEntity<>(successMessage, HttpStatus.OK);
+    }
+	@PostMapping("/login")
+	public ResponseEntity<RegistrationDTO> userLogin(@RequestBody RegistrationDTO user) throws MegaMartException{
+		RegistrationDTO u =service.userLogin(user.getEmailId(), user.getPassword());
+		return new ResponseEntity<>(u, HttpStatus.OK);
+	}
+	@PostMapping("/cart")
+	public ResponseEntity<String> addToCart(@RequestBody CartDTO cart) throws MegaMartException{
+		service.addToCart(cart);
+		String successMessage=environment.getProperty("API.PRODUCT_ADDED_SUCCESS");
+		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+	}
+	@PostMapping(value="/addProduct")
+	public ResponseEntity<String> addProduct(@RequestBody ProductDTO productDTO) throws MegaMartException {
+		String addProduct = megaMartService.addProduct(productDTO);
+		return new ResponseEntity<>("ADDED "+ addProduct + " SUCCESSFULLY", HttpStatus.CREATED);
+	}
+	
 }

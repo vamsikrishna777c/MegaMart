@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.megaMart.DTO.CartDTO;
+import com.megaMart.DTO.OrderDTO;
+import com.megaMart.DTO.ProductDTO;
 import com.megaMart.DTO.RegistrationDTO;
 import com.megaMart.Entity.Cart;
+import com.megaMart.Entity.Product;
 import com.megaMart.Entity.Registration;
 import com.megaMart.exception.MegaMartException;
 import com.megaMart.repository.CartRepository;
+import com.megaMart.repository.OrderRepositroy;
+import com.megaMart.repository.ProductRepository;
 import com.megaMart.repository.RegistrationRepository;
-
 import jakarta.transaction.Transactional;
 @Service
 @Transactional
@@ -21,6 +25,11 @@ public class MegaMartServiceImpl implements MegaMartService{
 	private RegistrationRepository repository;
 	@Autowired
 	private CartRepository cartRepository;
+
+	private RegistrationRepository registrationRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public void registration(RegistrationDTO registration) throws MegaMartException {
@@ -59,6 +68,22 @@ public class MegaMartServiceImpl implements MegaMartService{
 		cart.setSellerName(c.getSellerName());
 		cartRepository.save(cart);
 		
+	}
+	
+	public String addProduct(ProductDTO productDTO) {
+		// TODO Auto-generated method stub
+		// Add products to the database
+		Product product = new Product();
+		ProductDTO addProduct = new ProductDTO();
+		product.setProductId(productDTO.getProductId());
+		product.setProductName(productDTO.getProductName());
+		product.setDescription(productDTO.getDescription());
+		product.setPrice(productDTO.getPrice());
+		product.setDiscount(productDTO.getDiscount());
+		product.setDeliveryCharges(productDTO.getDeliveryCharges());
+		product.setAvgRating(productDTO.getAvgRating());
+		product.setSellerName(productDTO.getSellerName());
+		return productRepository.save(product).getProductName();
 	}
 
 }
