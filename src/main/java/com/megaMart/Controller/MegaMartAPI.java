@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.megaMart.DTO.CartDTO;
 import com.megaMart.DTO.RegistrationDTO;
 import com.megaMart.exception.MegaMartException;
 import com.megaMart.service.MegaMartService;
@@ -32,6 +33,12 @@ public class MegaMartAPI {
 		public ResponseEntity<RegistrationDTO> userLogin(@RequestBody RegistrationDTO user) throws MegaMartException{
 			RegistrationDTO u =service.userLogin(user.getEmailId(), user.getPassword());
 			return new ResponseEntity<>(u, HttpStatus.OK);
+		}
+		@PostMapping("/cart")
+		public ResponseEntity<String> addToCart(@RequestBody CartDTO cart) throws MegaMartException{
+			service.addToCart(cart);
+			String successMessage=environment.getProperty("API.PRODUCT_ADDED_SUCCESS");
+			return new ResponseEntity<>(successMessage, HttpStatus.OK);
 		}
 	 
 

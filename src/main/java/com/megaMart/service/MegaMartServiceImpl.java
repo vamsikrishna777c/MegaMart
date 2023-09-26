@@ -5,9 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.megaMart.DTO.CartDTO;
 import com.megaMart.DTO.RegistrationDTO;
+import com.megaMart.Entity.Cart;
 import com.megaMart.Entity.Registration;
 import com.megaMart.exception.MegaMartException;
+import com.megaMart.repository.CartRepository;
 import com.megaMart.repository.RegistrationRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +19,8 @@ import jakarta.transaction.Transactional;
 public class MegaMartServiceImpl implements MegaMartService{
 	@Autowired
 	private RegistrationRepository repository;
+	@Autowired
+	private CartRepository cartRepository;
 
 	@Override
 	public void registration(RegistrationDTO registration) throws MegaMartException {
@@ -40,6 +45,19 @@ public class MegaMartServiceImpl implements MegaMartService{
 		if(u.getPassword().equals(password)) {
 			return u;
 		}else throw new MegaMartException("Service.PASSWORD_NOT_VALID");
+		
+	}
+
+	@Override
+	public void addToCart(CartDTO c) throws MegaMartException {
+		// TODO Auto-generated method stub
+		Cart cart = new Cart();
+		cart.setCartId(c.getCartId());
+		cart.setQuantity(c.getQuantity());
+		cart.setCartOfferPrice(c.getCartOfferPrice());
+		cart.setProductName(cart.getProductName());
+		cart.setSellerName(c.getSellerName());
+		cartRepository.save(cart);
 		
 	}
 

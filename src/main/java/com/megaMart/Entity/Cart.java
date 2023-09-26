@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Cart {
@@ -16,6 +17,9 @@ public class Cart {
 	private String sellerName;
 	private Integer quantity;
 	private double cartOfferPrice;
+    @ManyToOne 
+	private Product product;
+	 
 	public Cart() {
 		// TODO Auto-generated constructor stub
 	}

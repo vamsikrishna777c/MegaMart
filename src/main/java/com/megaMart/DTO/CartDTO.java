@@ -2,6 +2,10 @@ package com.megaMart.DTO;
 
 import java.util.Objects;
 
+import com.megaMart.Entity.Product;
+
+import jakarta.persistence.ManyToOne;
+
 public class CartDTO {
 	
 	private Integer cartId;
@@ -9,6 +13,10 @@ public class CartDTO {
 	private String sellerName;
 	private Integer quantity;
 	private double cartOfferPrice;
+
+	/*
+	 * @ManyToOne private Product product;
+	 */
 	public CartDTO() {
 		// TODO Auto-generated constructor stub
 	}
