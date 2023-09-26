@@ -38,7 +38,7 @@ public class MegaMartAPI {
 		public ResponseEntity<String> addToCart(@RequestBody CartDTO cart) throws MegaMartException{
 			service.addToCart(cart);
 			String successMessage=environment.getProperty("API.PRODUCT_ADDED_SUCCESS");
-			return new ResponseEntity<>(successMessage, HttpStatus.OK);
+			return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 		}
 	 
 
